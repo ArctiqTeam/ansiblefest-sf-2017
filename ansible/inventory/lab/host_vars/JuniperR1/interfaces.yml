@@ -1,0 +1,12 @@
+  lag_interfaces:
+    - name: em1
+      description: Link to Cisco
+      lag: ae0
+    - name: em2
+      description: Link to Cisco
+      lag: ae0
+
+  main_interfaces:
+    - name: ae0
+      description: LAG Bundle to CiscoR0
+      ip_address: 192.168.100.161

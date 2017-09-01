@@ -1,0 +1,12 @@
+  lag_interfaces:
+    - name: FastEthernet1/0
+      description: Link to Juniper
+      lag: 1
+    - name: FastEthernet1/1
+      description: Link to Juniper
+      lag: 1
+
+  main_interfaces:
+    - name: 1
+      description: LAG Bundle to JuniperR1
+      ip_address: 192.168.100.160
