@@ -1,35 +1,24 @@
-# - name: Test playbook
-#   hosts: cisco-ios
-#   connection: local
-#   gather_facts: no
-#   vars:
-#     cli:
-#       host: "{{ inventory_hostname }}"
-#       timeout: 300
-#       port: 22
-#       username: root
-#       authorize: yes
-#       auth_pass: "test#1#1"
-#       password: "test#1#1"
-#   tasks:
-#     - name: Show Version
-#       ios_command:
-#         transport: cli
-#         commands: show version
-#       # when: inventory_hostname in groups['cisco-ios']
-
-- name: Test Juniper
-  hosts: junos
+- name: Test playbook
+  hosts: all
   connection: local
   gather_facts: no
   vars:
     cli:
       host: "{{ ansible_host }}"
       timeout: 300
+      port: 22
       username: root
+      authorize: yes
+      auth_pass: "test#1#1"
       password: "test#1#1"
   tasks:
+    - name: Show Version
+      ios_command:
+        transport: cli
+        commands: show version
+      when: inventory_hostname in groups['cisco-ios']
     - name: Show Version
       junos_command:
         transport: cli
         commans: show version
+      when: inventory_hostname in groups['junos']
