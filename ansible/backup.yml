@@ -1,20 +1,20 @@
-- name: Test playbook
+- name: Backup Configs
   hosts: all
   connection: local
   gather_facts: no
   tasks:
-    - name: Show Version
-      ios_command:
-        commands: show version
+    - name: Backup Cisco
+      ios_config:
+        backup: yes
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
           authorize: yes
       when: inventory_hostname in groups['cisco-ios']
-    - name: Show Version
-      junos_command:
-        commands: show version
+    - name: Backup Juniper
+      junos_config:
+        backup: yes
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
