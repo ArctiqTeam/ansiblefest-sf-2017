@@ -16,7 +16,7 @@
     - name: Reset Juniper
       junos_config:
         src: base/{{ inventory_hostname }}_config.base
-        update: replace
+        update: override
         provider:
           host: "{{ ansible_host }}"
           timeout: 300

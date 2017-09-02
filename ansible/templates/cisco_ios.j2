@@ -1,0 +1,18 @@
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+{% for interface in main_interfaces %}
+interface {{ interface.name }}
+ ip address {{ interface.ip_address | ipaddr('address')}} {{ interface.ip_address | ipaddr('netmask')}}
+ ip ospf cost {{ interface.metric }}
+{% if interface.description is defined %}
+ description "{{ interface.description }}";
+{% endif %}
+ no shutdown
+!
+{% endfor %}
+!
+router ospf 10
+router-id {{ ansible_net_interfaces['FastEthernet0/0'].ipv4.address }}
+{% for interface in main_interfaces %}
+ network {{ interface.ip_address | ipaddr('network')}} {{ interface.ip_address | ipaddr('hostmask')}} area 0
+{% endfor %}
+!

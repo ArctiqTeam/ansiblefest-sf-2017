@@ -3,21 +3,41 @@
   connection: local
   gather_facts: no
   tasks:
+    - name: Gather Cisco Facts
+      ios_facts:
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+          authorize: yes
+      when: inventory_hostname in groups['cisco_ios']
+    - name: Gather Juniper Facts
+      junos_facts:
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+      when: inventory_hostname in groups['junos']
+    - name: hostvars
+      debug: var=hostvars[inventory_hostname] verbosity=3
+    - name: Build templates
+      template:
+        src: "{{ template_name }}"
+        dest: /var/tmp/{{ inventory_hostname }}.conf
 
-    
-    - name: Reset Cisco
+    - name: Push Cisco Config
       ios_config:
-        src: base/{{ inventory_hostname }}_config.base
+        src: /var/tmp/{{ inventory_hostname }}.conf
         save: yes
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
           authorize: yes
-      when: inventory_hostname in groups['cisco-ios']
-    - name: Reset Juniper
+      when: inventory_hostname in groups['cisco_ios']
+    - name: Push Juniper Config
       junos_config:
-        src: base/{{ inventory_hostname }}_config.base
+        src: /var/tmp/{{ inventory_hostname }}.conf
         update: merge
         provider:
           host: "{{ ansible_host }}"
