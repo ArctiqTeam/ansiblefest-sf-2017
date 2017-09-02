@@ -1,0 +1,116 @@
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+interfaces {
+    em0 {
+        unit 0 {
+            family inet {
+                address 172.16.192.11/24;
+            }
+        }
+    }
+{% for interface in lag_interfaces %}
+    {{ interface.name }} {
+    {% if interface.description is defined %}
+        description "{{ interface.description }}";
+    {% endif %}
+        gigether-options {
+            {# We assume 802.3ad for ALL lag interface members #}
+            802.3ad {{ interface.lag }};
+        }
+    }
+    {% endfor %}
+
+
+
+}
+
+interfaces {
+{#
+    This template is made up of a set a for loops to loop over interfaces variables
+    The first set of interfaces we loop over is lag_interfaces
+    The basis of the interface configurations is the creation of "Interface Profiles".  These profiles are defined as:
+        1 - lag_interfaces
+        2 - core_main_interfaces
+    More profiles can be added at a later time.  The profiles define (based on what's coded in the templates)
+    The profiles are used in the template below to define specific interface charateristics.  They are also used in the routing protocols template.
+
+    This first block is to loop over the lag_interfaces and configure them accordingly
+#}
+{#
+
+    This next block defines interfaces specified as core_main_interfaces.
+    The logic in this block can be re-used when defining more interface profile types later on.
+#}
+{% for interface in core_main_interfaces %}
+    {{ interface.name }} {
+    {% if interface.description is defined %}
+        description "{{ interface.description }}";
+    {% endif %}
+        mtu 4484;
+    {# while looping over the core_main_interfaces if we see an "AE" interface we know its a bundle interface instead of standalone #}
+    {% if interface.name | search('ae') %}
+        aggregated-ether-options {
+            {# if we see a neighbour interface defined we specify more configuration options #}
+        {% if interface.neighbour_ip is defined and interface.neighbour_ip | ipaddr %}
+            bfd-liveness-detection {
+                minimum-interval 100;
+                multiplier 3;
+                neighbor {{ interface.neighbour_ip }};
+                local-address {{ loopback_ip_address | ipaddr('address') }};
+            }
+        {% endif %}
+        {# since we are now defining an AE interface we need to perform some calculations to figure out the minimum number of links required #}
+        {% set link_count = 0 %}
+        {# we create a separate loop inside of this current iteration ... to count the number of lag_interfaces that are a part of this AE bundle #}
+        {% for lag_interface in lag_interfaces %}
+        {# if we find a match we increment the link_count variable #}
+          {% if lag_interface.lag | match(interface.name) %}
+              {% set link_count = link_count +1 %}
+              {# because of Jinja variable scope the link_count variable's scope is only within this loop.  So we use an extension to
+                 add a dictionary item to the interface variable itself, and setting it equal to the link_count variable we have #}
+              {% do interface.update({'links':link_count}) %}
+          {% endif %}
+        {% endfor %}
+              {# then we do the math to divide by 2, roundup with 0 decimal places #}
+              {% set link_count = (interface.links / 2) | round(0, 'ceil') %}
+              {# the output is formatted without decimal places #}
+            minimum-links {{ "{:.0f}".format(link_count) }};
+            lacp {
+                active;
+                periodic fast;
+            }
+        }
+    {% endif %}
+    {% if interface.ip_address is defined and interface.ip_address | ipaddr %}
+        unit 0 {
+            family inet {
+                address {{ interface.ip_address }};
+            }
+    {% endif %}
+            family mpls;
+        }
+    }
+{% endfor %}
+    dsc {
+        unit 0 {
+            family inet {
+                filter {
+                    output FLT-DSCLOG;
+                }
+            }
+        }
+    }
+
+    lo0 {
+        description "primary loopback interface";
+        unit 0 {
+            family inet {
+                inactive: filter {
+                    input RE_Protection;
+                }
+                address {{ loopback_ip_address | mandatory }} {
+                    primary;
+                }
+            }
+        }
+    }
+}

@@ -1,20 +1,24 @@
-- name: Test playbook
+- name: Reset Lab
   hosts: all
   connection: local
   gather_facts: no
   tasks:
-    - name: Show Version
-      ios_command:
-        commands: show version
+
+    
+    - name: Reset Cisco
+      ios_config:
+        src: base/{{ inventory_hostname }}_config.base
+        save: yes
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
           authorize: yes
-      when: inventory_hostname in groups['cisco_ios']
-    - name: Show Version
-      junos_command:
-        commands: show version
+      when: inventory_hostname in groups['cisco-ios']
+    - name: Reset Juniper
+      junos_config:
+        src: base/{{ inventory_hostname }}_config.base
+        update: merge
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
