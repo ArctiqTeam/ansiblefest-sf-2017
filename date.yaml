@@ -2,4 +2,4 @@
 - hosts: all
   tasks:
   - name: Show some stuff
-    shell: date
+    command: date
