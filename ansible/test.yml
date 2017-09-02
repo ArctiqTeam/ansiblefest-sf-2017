@@ -1,0 +1,24 @@
+- name: Test playbook
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Show Version
+      ios_command:
+        commands: show version
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+          authorize: yes
+      when: inventory_hostname in groups['cisco-ios']
+      register: cisco_facts
+    - name: Show Version
+      junos_command:
+        commands: show version
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+      when: inventory_hostname in groups['junos']
+      register: junos_facts
