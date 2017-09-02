@@ -1,0 +1,24 @@
+- name: Reset Lab
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Reset Cisco
+      ios_config:
+        src: base/{{ inventory_hostname }}_config.base
+        save: yes
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+          authorize: yes
+      when: inventory_hostname in groups['cisco-ios']
+    - name: Reset Juniper
+      junos_config:
+        src: base/{{ inventory_hostname }}_config.base
+        update: replace
+        provider:
+          host: "{{ ansible_host }}"
+          timeout: 300
+          port: 22
+      when: inventory_hostname in groups['junos']

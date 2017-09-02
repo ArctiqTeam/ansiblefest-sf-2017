@@ -1,12 +1,13 @@
 Building configuration...
 
-Current configuration : 1151 bytes
+Current configuration : 1209 bytes
 !
-! Last configuration change at 00:41:18 UTC Sat Sep 2 2017
+! Last configuration change at 01:27:28 UTC Sat Sep 2 2017 by root
 !
 version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
+service password-encryption
 !
 hostname CiscoR0
 !
@@ -14,7 +15,7 @@ boot-start-marker
 boot-end-marker
 !
 !
-enable secret 5 $1$0Hx5$qnmnVMFO/p3U1OZOeFGXY/
+enable secret 5 $1$RT7l$Jsu1q4DIJQouF9/8GyhGq.
 !
 no aaa new-model
 no ip icmp rate-limit unreachable
@@ -38,7 +39,7 @@ multilink bundle-name authenticated
 !
 !
 !
-username root password 0 ********
+username root password 7 03105E18124C700F1F
 !
 !
 ip tcp synwait-time 5
@@ -95,7 +96,7 @@ line aux 0
  logging synchronous
  stopbits 1
 line vty 0 4
- password ********
+ password 7 021201481F455E621D
  login local
  transport input ssh
 !
