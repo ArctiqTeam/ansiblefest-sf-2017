@@ -10,10 +10,7 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          username: root
           authorize: yes
-          auth_pass: "test#1#1"
-          password: "test#1#1"
       when: inventory_hostname in groups['cisco-ios']
       register: cisco_facts
     - name: Show Version
@@ -23,12 +20,5 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          username: root
-          password: "test#1#1"
       when: inventory_hostname in groups['junos']
       register: junos_facts
-
-    - debug: var={{ item }}
-      with_items:
-        - "{{ cisco_facts | default(omit) }}"
-        - "{{ junos_facts | default(omit) }}"
