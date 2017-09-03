@@ -1,4 +1,4 @@
-- name: Reset Lab
+- name: Configure the Lab
   hosts: all
   connection: local
   gather_facts: no
@@ -20,11 +20,10 @@
       when: inventory_hostname in groups['junos']
     - name: hostvars
       debug: var=hostvars[inventory_hostname] verbosity=3
-    - name: Build templates
+    - name: Build Config Templates
       template:
         src: "{{ template_name }}"
         dest: /var/tmp/{{ inventory_hostname }}.conf
-
     - name: Push Cisco Config
       ios_config:
         src: /var/tmp/{{ inventory_hostname }}.conf

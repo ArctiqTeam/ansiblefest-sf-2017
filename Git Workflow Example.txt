@@ -1,0 +1,24 @@
+title Git/Ansible Network Workflow
+
+linear
+autonumber
+
+actor User
+actor Approvers
+database Git
+control Ansible
+
+==Coding and Testing==
+Git->User: Checkout Feature Branch
+User->Git: Push Changes and Submit PR
+==Verification and Lab Deployment==
+Git->Approvers: Verify Code Changes
+Approvers->Git: Merge to Lab Branch
+Git->Ansible: Pull Feature Branch
+Ansible->Lab/Dev: Make Changes to Lab
+Approvers->Lab/Dev: Ensure Changes Successful
+==Verification and Production Deployment==
+Approvers->Git: Merge Branch into Production Branch
+Git->Ansible: Pull Production Branch
+Ansible->Production: Make Changes Production
+Approvers->Production: Ensure Changes Successful
