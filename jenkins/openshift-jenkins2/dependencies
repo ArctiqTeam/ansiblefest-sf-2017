@@ -1,7 +1,6 @@
 yum install -y wget net-tools iputils
-wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-rpm -i epel-release-latest-7.noarch.rpm
 yum install -y python-devel python-pip
 pip install ansible==2.3.2.0
 pip install junos-eznc
 pip install jxmlease
+pip install asn1crypto
