@@ -11,6 +11,8 @@
           timeout: 300
           port: 22
           authorize: yes
+          username: "{{ username }}"
+          password: "{{ password }}"
       when: inventory_hostname in groups['cisco_ios']
     - name: Show Version
       junos_command:
