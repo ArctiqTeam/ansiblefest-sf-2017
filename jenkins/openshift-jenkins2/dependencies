@@ -6,3 +6,20 @@ pip install --upgrade pip
 pip install ansible==2.3.2.0
 pip install junos-eznc
 pip install jxmlease
+
+
+
+## ubuntu
+apt-get update
+apt-get install software-properties-common
+
+## needed?
+apt-add-repository ppa:ansible/ansible
+apt-get update
+apt-get install ansible sshpass
+##
+
+apt-get install python-setuptools python-dev build-essential
+easy_install pip
+pip install ansible==2.3.2
+#use pip?
