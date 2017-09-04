@@ -10,7 +10,7 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
+#          authorize: yes
 #          username: "{{ username }}"
 #          password: "{{ password }}"
       when: inventory_hostname in groups['cisco_ios']
