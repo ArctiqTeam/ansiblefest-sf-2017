@@ -7,19 +7,23 @@ pip install ansible==2.3.2.0
 pip install junos-eznc
 pip install jxmlease
 
+## Jenkins server (not container)
+https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins
+sudo yum install java
+
+
 
 
 ## ubuntu
 apt-get update
-apt-get install software-properties-common
-
-## needed?
-apt-add-repository ppa:ansible/ansible
-apt-get update
-apt-get install ansible sshpass
-##
-
-apt-get install python-setuptools python-dev build-essential
+apt-get install -y software-properties-common
+apt-get install -y python-setuptools python-dev build-essential sshpass
 easy_install pip
 pip install ansible==2.3.2
+pip install junos-eznc
+pip install jxmlease
+
 #use pip?
