@@ -9,7 +9,8 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
+          username: "{{ net_username }}"
+          password: "{{ net_password }}"
       when: inventory_hostname in groups['cisco_ios']
     - name: Gather Juniper Facts
       junos_facts:
@@ -17,6 +18,8 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
+          username: "{{ net_username }}"
+          password: "{{ net_password }}"
       when: inventory_hostname in groups['junos']
     - name: hostvars
       debug: var=hostvars[inventory_hostname] verbosity=3
@@ -33,7 +36,8 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
+          username: "{{ net_username }}"
+          password: "{{ net_password }}"
       when: inventory_hostname in groups['cisco_ios']
     - name: Push Juniper Config
       junos_config:
@@ -43,4 +47,6 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
+          username: "{{ net_username }}"
+          password: "{{ net_password }}"
       when: inventory_hostname in groups['junos']

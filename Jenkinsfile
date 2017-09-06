@@ -9,7 +9,7 @@ pipeline {
       }
     stage ('Test Connectivity'){
       steps {
-        ansiblePlaybook colorized: true, inventory: '${WORKSPACE}/ansible/inventory/lab/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
+      ansiblePlaybook colorized: true, extras: '-e net_username=root -e net_password=ansiblefest-sf-2017', inventory: '${WORKSPACE}/ansible/inventory/lab/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
       }
     }
   }
