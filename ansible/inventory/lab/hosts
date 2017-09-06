@@ -1,10 +1,10 @@
 [all:vars]
 
 [cisco_ios]
-CiscoR0 ansible_host=192.168.93.20
+CiscoR0 ansible_host=192.168.93.20 username="root" password="ansiblefest-sf-2017"
 
 [junos]
-JuniperR1 ansible_host=192.168.93.21
+JuniperR1 ansible_host=192.168.93.21 username="root" password="ansiblefest-sf-2017"
 
 [lab:children]
 cisco_ios
