@@ -7,6 +7,12 @@ pipeline {
 
           }
       }
+    stage ('Clean up local env'){
+      steps {
+        sh '''#!/bin/bash
+        rm -rf /root/.ansible/*'''
+      }
+    }
     stage ('Test Connectivity'){
       steps {
       ansiblePlaybook colorized: true, extras: '-e net_username=root -e net_password=ansiblefest-sf-2017', inventory: '${WORKSPACE}/ansible/inventory/lab/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
