@@ -3,6 +3,12 @@
   connection: local
   gather_facts: no
   tasks:
+    # - name: Show version
+    #   napalm_cli:
+    #     provider: "{{ dev_provider }}"
+    #     args:
+    #         commands:
+    #             - show version
     - name: Show Version
       ios_command:
         commands: show version
@@ -10,7 +16,6 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
       when: inventory_hostname in groups['cisco_ios']
     - name: Show Version
       junos_command:
@@ -18,5 +23,4 @@
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
-          port: 22
       when: inventory_hostname in groups['junos']

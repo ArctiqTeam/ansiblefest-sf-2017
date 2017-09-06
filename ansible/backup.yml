@@ -10,7 +10,6 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
       when: inventory_hostname in groups['cisco_ios']
     - name: Backup Juniper
       junos_config:

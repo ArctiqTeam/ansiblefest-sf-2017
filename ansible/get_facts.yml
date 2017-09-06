@@ -1,0 +1,8 @@
+- name: Get Facts playbook
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - napalm_get_facts:
+        provider: "{{ dev_provider }}"
+        ignore_notimplemented: True

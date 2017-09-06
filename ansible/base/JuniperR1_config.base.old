@@ -1,14 +1,12 @@
-version 14.1R1.10;
+## Last changed: 2017-09-02 00:47:56 UTC
+version 12.1R1.9;
 system {
     host-name JuniperR1;
     root-authentication {
-        encrypted-password "$1$U.RV4Ml0$ewHfXYhvuGhc69wTy28r40"; ## SECRET-DATA
+        encrypted-password "$1$O4xEp4dM$hrv/DEx2qz1T0Djznqnep/";
     }
     services {
         ssh;
-        netconf {
-            ssh;
-        }
     }
     syslog {
         user * {
@@ -24,10 +22,10 @@ system {
     }
 }
 interfaces {
-    fxp0 {
+    em0 {
         unit 0 {
             family inet {
-                address 172.16.192.12/24;
+                address 172.16.192.11/24;
             }
         }
     }

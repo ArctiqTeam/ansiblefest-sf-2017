@@ -9,17 +9,13 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
       when: inventory_hostname in groups['cisco_ios']
     - name: Gather Juniper Facts
       junos_facts:
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
-          port: 22
       when: inventory_hostname in groups['junos']
-    - name: hostvars
-      debug: var=hostvars[inventory_hostname] verbosity=3
     - name: Build Config Templates
       template:
         src: "{{ template_name }}"
@@ -32,14 +28,11 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          authorize: yes
       when: inventory_hostname in groups['cisco_ios']
     - name: Push Juniper Config
       junos_config:
         src: /var/tmp/{{ inventory_hostname }}.conf
-        update: merge
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
-          port: 22
       when: inventory_hostname in groups['junos']

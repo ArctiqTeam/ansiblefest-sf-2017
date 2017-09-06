@@ -1,9 +1,9 @@
   main_interfaces:
-    - name: em1
+    - name: ge-0/0/0
       description: Link to CiscoR0
       ip_address: 192.168.100.11/24
       metric: 1
-    - name: em2
+    - name: ge-0/0/1
       description: Link to PC Net
       ip_address: 192.168.202.1/24
       metric: 1
