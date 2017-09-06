@@ -4,8 +4,13 @@
 CiscoR0 ansible_host=192.168.93.20
 
 [junos]
-JuniperR1 ansible_host=192.168.93.21 
+JuniperR1 ansible_host=192.168.93.21
 
 [lab:children]
 cisco_ios
 junos
+
+[lab:vars]
+ansible_connection=local
+ansible_user=root
+ansible_ssh_pass=ansiblefest-sf-2017

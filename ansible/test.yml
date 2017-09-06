@@ -10,8 +10,8 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          username: "{{ net_username }}"
-          password: "{{ net_password }}"
+          username: "{{ ansible_user }}"
+          password: "{{ ansible_ssh_pass }}"
       when: inventory_hostname in groups['cisco_ios']
     - name: Show Version
       junos_command:
@@ -20,6 +20,6 @@
           host: "{{ ansible_host }}"
           timeout: 300
           port: 22
-          username: "{{ net_username }}"
-          password: "{{ net_password }}"
+          username: "{{ ansible_user }}"
+          password: "{{ ansible_ssh_pass }}"
       when: inventory_hostname in groups['junos']
