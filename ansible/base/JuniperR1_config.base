@@ -25,13 +25,13 @@ interfaces {
     em0 {
         unit 0 {
             family inet {
-                address 10.110.111.161/24;
+                address 192.168.93.21/24;
             }
         }
     }
 }
 routing-options {
     static {
-        route 0.0.0.0/0 next-hop 10.110.111.1;
+        route 0.0.0.0/0 next-hop 192.168.93.1;
     }
 }

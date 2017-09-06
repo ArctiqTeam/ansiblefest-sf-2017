@@ -49,7 +49,7 @@ ip tcp synwait-time 5
 !
 !
 interface FastEthernet0/0
- ip address 10.110.111.160 255.255.255.0
+ ip address 192.168.93.20 255.255.255.0
  duplex full
 !
 interface FastEthernet1/0
@@ -75,7 +75,7 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
-ip route 0.0.0.0 0.0.0.0 10.110.111.1
+ip route 0.0.0.0 0.0.0.0 192.168.93.1
 !
 !
 !
