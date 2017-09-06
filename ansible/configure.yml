@@ -13,7 +13,7 @@
           password: "{{ net_password }}"
       when: inventory_hostname in groups['cisco_ios']
     - name: Gather Juniper Facts
-      junos_facts:
+      junos_get_facts:
         provider:
           host: "{{ ansible_host }}"
           timeout: 300
