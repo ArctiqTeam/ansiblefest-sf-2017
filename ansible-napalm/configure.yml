@@ -1,0 +1,19 @@
+- name: Configure the Lab
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Build Config Templates
+      template:
+        src: "{{ template_name }}"
+        dest: /var/tmp/{{ inventory_hostname }}.conf
+    - name: Push Config to Device
+      napalm_install_config:
+        provider: "{{ dev_provider }}"
+        config_file: /var/tmp/{{ inventory_hostname }}.conf
+        timeout: 120
+        commit_changes: True
+        get_diffs: True
+        diff_file: /var/tmp/{{ inventory_hostname }}.diff
+    - name: Remove the config files
+      file: path="/var/tmp/{{ inventory_hostname }}.conf" state=absent

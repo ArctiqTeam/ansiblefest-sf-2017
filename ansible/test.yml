@@ -3,12 +3,6 @@
   connection: local
   gather_facts: no
   tasks:
-    # - name: Show version
-    #   napalm_cli:
-    #     provider: "{{ dev_provider }}"
-    #     args:
-    #         commands:
-    #             - show version
     - name: Show Version
       ios_command:
         commands: show version

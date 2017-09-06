@@ -3,19 +3,6 @@
   connection: local
   gather_facts: no
   tasks:
-    - name: Gather Cisco Facts
-      ios_facts:
-        provider:
-          host: "{{ ansible_host }}"
-          timeout: 300
-          port: 22
-      when: inventory_hostname in groups['cisco_ios']
-    - name: Gather Juniper Facts
-      junos_facts:
-        provider:
-          host: "{{ ansible_host }}"
-          timeout: 300
-      when: inventory_hostname in groups['junos']
     - name: Build Config Templates
       template:
         src: "{{ template_name }}"
@@ -36,3 +23,5 @@
           host: "{{ ansible_host }}"
           timeout: 300
       when: inventory_hostname in groups['junos']
+    - name: Remove the config files
+      file: path="/var/tmp/{{ inventory_hostname }}.conf" state=absent

@@ -1,0 +1,26 @@
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+interfaces {
+{% for interface in main_interfaces %}
+    {{ interface.name }} {
+    {% if interface.description is defined %}
+        description "{{ interface.description }}";
+    {% endif %}
+        unit 0 {
+            family inet {
+                address {{ interface.ip_address }};
+            }
+        }
+    }
+{% endfor %}
+}
+protocols {
+    ospf {
+        area 0 {
+        {% for interface in main_interfaces %}
+                interface {{ interface.name }}.0 {
+                    metric {{ interface.metric }};
+                }
+        {% endfor %}
+        }
+    }
+}

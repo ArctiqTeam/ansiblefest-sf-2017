@@ -1,0 +1,15 @@
+- name: Reset Lab
+  hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Push Config to Device
+      napalm_install_config:
+        provider: "{{ dev_provider }}"
+        config_file: base/{{ inventory_hostname }}_config.base
+        timeout: 120
+        commit_changes: True
+        replace_config: True
+        get_diffs: True
+        archive_file: /var/tmp/{{ inventory_hostname }}.archive
+        diff_file: /var/tmp/{{ inventory_hostname }}.diff

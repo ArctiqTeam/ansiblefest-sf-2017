@@ -1,4 +1,5 @@
 #jinja2: lstrip_blocks: "True", trim_blocks: "True"
+version {{ os_version }}
 {% for interface in main_interfaces %}
 interface {{ interface.name }}
  ip address {{ interface.ip_address | ipaddr('address')}} {{ interface.ip_address | ipaddr('netmask')}}
@@ -16,3 +17,4 @@ router-id {{ mgmt_interface.ip_address | ipaddr('address') }}
  network {{ interface.ip_address | ipaddr('network')}} {{ interface.ip_address | ipaddr('hostmask')}} area 0
 {% endfor %}
 !
+end

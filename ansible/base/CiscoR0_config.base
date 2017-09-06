@@ -27,7 +27,8 @@ no ipv6 cef
 multilink bundle-name authenticated
 !
 !
-!
+archive
+ path disk0:archive
 !
 !
 !

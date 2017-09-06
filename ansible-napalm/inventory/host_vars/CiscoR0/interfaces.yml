@@ -1,3 +1,5 @@
+  os_version: 15.2
+
   mgmt_interface:
     name: FastEthernet0/0
     ip_address: 172.16.192.10/24
