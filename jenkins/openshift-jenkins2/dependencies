@@ -20,10 +20,11 @@ sudo yum install java
 ## ubuntu
 apt-get update
 apt-get install -y software-properties-common
-apt-get install -y python-setuptools python-dev build-essential sshpass
+apt-get install -y python-setuptools python-dev build-essential
 easy_install pip
 pip install ansible==2.3.2
 pip install junos-eznc
 pip install jxmlease
 
 #use pip?
+# sshpass
