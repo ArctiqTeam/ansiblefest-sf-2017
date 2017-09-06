@@ -2,10 +2,15 @@ pipeline {
   agent any
   stages {
     stage('Git Clone') {
-    git branch: 'lab', url: 'https://github.com/ArctiqTeam/ansiblefest-sf-2017'
-    }
+      steps {
+        git branch: 'lab', url: 'https://github.com/ArctiqTeam/ansiblefest-sf-2017'
+
+          }
+      }
     stage ('Test Connectivity'){
-    ansiblePlaybook colorized: true, inventory: '${WORKSPACE}/ansible/inventory/lab/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
+      steps {
+        ansiblePlaybook colorized: true, inventory: '${WORKSPACE}/ansible/inventory/lab/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
+      }
     }
   }
 }
