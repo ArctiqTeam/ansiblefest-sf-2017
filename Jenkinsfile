@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        rocketSend channel: 'general', message: 'START RESET'
+        rocketSend channel: 'network-build', message: 'START RESET'
         git branch: 'reset', url: 'https://github.com/ArctiqTeam/ansiblefest-sf-2017'
 
           }
@@ -17,7 +17,7 @@ pipeline {
     stage ('Reset Router Configs'){
       steps {
       ansiblePlaybook inventory: '${WORKSPACE}/ansible/inventory/jenkins/hosts', playbook: '${WORKSPACE}/ansible/reset.yml', sudoUser: null
-      rocketSend channel: 'general', message: 'RESET COMPLETE'
+      rocketSend channel: 'network-build', message: 'RESET COMPLETE'
       }
     }
   }
