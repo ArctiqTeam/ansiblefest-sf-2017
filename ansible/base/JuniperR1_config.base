@@ -27,13 +27,13 @@ interfaces {
     fxp0 {
         unit 0 {
             family inet {
-                address 172.16.192.11/24;
+                address 192.168.93.21/24;
             }
         }
     }
 }
 routing-options {
     static {
-        route 0.0.0.0/0 next-hop 172.16.192.2;
+        route 0.0.0.0/0 next-hop 192.168.93.1;
     }
 }
