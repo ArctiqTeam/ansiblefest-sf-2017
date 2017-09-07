@@ -1,0 +1,6 @@
+template_name: junos.j2
+dev_provider:
+  hostname: "{{ ansible_host }}"
+  username: "{{ lookup('env','ANSIBLE_NET_USERNAME') }}"
+  password: "{{ lookup('env','ANSIBLE_NET_PASSWORD') }}"
+  dev_os: "junos"
