@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        git branch: 'master', url: 'https://github.com/ArctiqTeam/ansiblefest-sf-2017'
+        git branch: 'reset', url: 'https://github.com/ArctiqTeam/ansiblefest-sf-2017'
 
           }
       }
