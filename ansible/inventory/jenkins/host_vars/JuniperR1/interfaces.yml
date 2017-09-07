@@ -1,6 +1,6 @@
   mgmt_interface:
     name: fxp0
-    ip_address: 172.16.192.11/24
+    ip_address: 192.168.93.21/24
 
   main_interfaces:
     - name: ge-0/0/0

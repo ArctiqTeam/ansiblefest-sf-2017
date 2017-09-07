@@ -1,6 +1,6 @@
   mgmt_interface:
     name: FastEthernet0/0
-    ip_address: 172.16.192.10/24
+    ip_address: 192.168.93.20/24
 
   main_interfaces:
     - name: FastEthernet1/0
