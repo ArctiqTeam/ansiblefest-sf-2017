@@ -51,7 +51,7 @@ ip tcp synwait-time 5
 !
 !
 interface FastEthernet0/0
- ip address 192.168.93.21 255.255.255.0
+ ip address 192.168.93.20 255.255.255.0
  duplex full
 !
 interface FastEthernet1/0
