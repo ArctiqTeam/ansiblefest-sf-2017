@@ -13,14 +13,9 @@ pipeline {
         rm -rf /root/.ansible/*'''
       }
     }
-    stage ('Test Connectivity'){
+    stage ('Reset Router Configs'){
       steps {
-      ansiblePlaybook inventory: '${WORKSPACE}/ansible/inventory/jenkins/hosts', playbook: '${WORKSPACE}/ansible/test.yml', sudoUser: null
-      }
-    }
-    stage ('Configure OSPF'){
-      steps {
-      ansiblePlaybook inventory: '${WORKSPACE}/ansible/inventory/jenkins/hosts', playbook: '${WORKSPACE}/ansible/configure.yml', sudoUser: null
+      ansiblePlaybook inventory: '${WORKSPACE}/ansible/inventory/jenkins/hosts', playbook: '${WORKSPACE}/ansible/reset.yml', sudoUser: null
       }
     }
   }
