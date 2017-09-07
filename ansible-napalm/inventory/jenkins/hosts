@@ -1,10 +1,10 @@
 [all:vars]
 
 [cisco_ios]
-CiscoR0 ansible_host=172.16.192.10
+CiscoR0 ansible_host=192.168.93.20
 
 [junos]
-JuniperR1 ansible_host=172.16.192.11
+JuniperR1 ansible_host=192.168.93.21
 
 [lab:children]
 cisco_ios
